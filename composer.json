@@ -1,0 +1,25 @@
+{
+    "name": "linhecheng/cmlphp-ext-blade",
+    "description": "修改自Laravel的模引擎 - Blade",
+    "license": "Apache-2.0",
+    "support": {
+        "issues": "https://github.com/linhecheng/cmlphp-ext-blade/issues",
+        "source": "https://github.com/linhecheng/cmlphp-ext-blade"
+    },
+    "authors": [
+        {
+            "name": "linhecheng",
+            "email": "linhechengbugh@live.com",
+            "homepage": "http://51beautylife.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "CmlExt\\Blade\\": "src/"
+        }
+    }
+}
