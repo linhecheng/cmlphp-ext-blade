@@ -191,10 +191,9 @@ class BladeCompiler
     /**
      * Get the path to the compiled version of a view.
      *
-     * @param  string $path
      * @return string
      */
-    public function getCompiledPath($path)
+    public function getCompiledPath()
     {
         $path = $this->cachePath . str_replace('.', DIRECTORY_SEPARATOR, $this->cacheFileName) . '.cache.php';
         is_dir(dirname($path)) || mkdir(dirname($path), 0700, true);
@@ -210,7 +209,7 @@ class BladeCompiler
      */
     public function isExpired($path)
     {
-        $compiled = $this->getCompiledPath($path);
+        $compiled = $this->getCompiledPath();
 
         // If the compiled file doesn't exist we will indicate that the view is expired
         // so that it can be re-compiled. Else, we will verify the last modification
@@ -308,7 +307,7 @@ class BladeCompiler
         $contents = $this->compileString(file_get_contents($this->getPath()));
 
         if (!is_null($this->cachePath)) {
-            file_put_contents($this->getCompiledPath($this->getPath()), $contents, 0);
+            file_put_contents($this->getCompiledPath(), $contents, 0);
         }
     }
 
@@ -528,7 +527,7 @@ class BladeCompiler
         $callback = function ($matches) {
             $whitespace = empty($matches[3]) ? '' : $matches[3].$matches[3];
 
-            return $matches[1] ? $matches[0] : '<?php echo e('.$this->compileEchoDefaults($matches[2]).'); ?>'.$whitespace;
+            return $matches[1] ? $matches[0] : '<?php echo \CmlExt\Blade\View::e('.$this->compileEchoDefaults($matches[2]).'); ?>'.$whitespace;
         };
 
         return preg_replace_callback($pattern, $callback, $value);

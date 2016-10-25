@@ -142,13 +142,6 @@ class View implements ArrayAccess
     {
         $data = array_merge($this->factory->getShared(), $this->data);
 
-        foreach ($data as $key => $value) {
-            if ($value instanceof Renderable) {
-                exit('ddd');
-                $data[$key] = $value->render();
-            }
-        }
-
         return $data;
     }
 
@@ -337,7 +330,6 @@ class View implements ArrayAccess
      * Remove a piece of bound data from the view.
      *
      * @param  string  $key
-     * @return bool
      */
     public function __unset($key)
     {
@@ -387,7 +379,7 @@ class View implements ArrayAccess
      */
     public static function e($value)
     {
-        return htmlentities($value, ENT_QUOTES, 'UTF-8', false);
+        return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
     }
 
 
